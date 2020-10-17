@@ -1,6 +1,8 @@
-const form = document.querySelector(".form"),
-  input = form.querySelector("input"),
-  greetings = document.querySelector(".greetings");
+const form = document.querySelector(".js-nameForm");
+const input = form.querySelector("input");
+const greetings = document.querySelector(".greetings");
+const userName = document.querySelector('#userName');
+const editName = document.querySelector('#editName');
 
 const USER_LS = "GAGA";
 const SHOW = "showing";
@@ -9,7 +11,7 @@ function saveName(text) {
   localStorage.setItem(USER_LS, text);
 }
 
-function handleSubmit(event) {
+function handleNameSubmit(event) {
   event.preventDefault();
   const currentValue = input.value;
   paintName(currentValue);
@@ -19,12 +21,13 @@ function handleSubmit(event) {
 function paintName(text) {
   form.classList.remove(SHOW);
   greetings.classList.add(SHOW);
-  greetings.innerText = `Hello ${text}`;
+  userName.innerText = `Hello ${text}`;
 }
 
 function askForName() {
   form.classList.add(SHOW);
-  form.addEventListener("submit", handleSubmit);
+  greetings.classList.remove(SHOW);
+  form.addEventListener("submit", handleNameSubmit);
 }
 
 function loadName() {
@@ -35,6 +38,7 @@ function loadName() {
     paintName(currentUser);
   }
 }
+editName.addEventListener('click', ()=>{input.value=""; localStorage.removeItem(USER_LS); askForName();})
 
 function init() {
   loadName();

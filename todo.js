@@ -9,7 +9,7 @@ let todos = [];
 function deletTodo(event) {
   const btn = event.target;
   const li = btn.parentNode;
-  todoList.removeChild(li); //=li.remove()
+  todoList.removeChild(li); 
   const cleanTodos = todos.filter(function (todo) {
     return todo.id !== parseInt(li.id);
   });
@@ -26,11 +26,10 @@ function paintTOdo(text) {
   const delBtn = document.createElement("button");
   const span = document.createElement("span");
   const newId = todos.length + 1;
-  delBtn.innerText = "X";
   delBtn.addEventListener("click", deletTodo);
   span.innerText = text;
-  li.appendChild(delBtn);
   li.appendChild(span);
+  li.appendChild(delBtn);
   li.id = newId;
   todoList.appendChild(li);
   const todoObj = {
